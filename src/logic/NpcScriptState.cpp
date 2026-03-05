@@ -481,7 +481,7 @@ void NpcScriptState::importState(NpcAIState& state, const json& j) const
     state.symEnd = j["symEnd"];
     state.phase = (NpcAIState::EPhase)((int)j["phase"]);
     state.valid = j["valid"];
-    state.name = j["name"];
+    state.name = j["name"].get<std::string>();
     state.stateTime = j["stateTime"];
     state.prgState = (EPrgStates)((int)j["prgState"]);
     state.isRoutineState = j["isRoutineState"];
@@ -546,7 +546,7 @@ void NpcScriptState::importScriptState(const json& j)
         r.hoursEnd = jr["hoursEnd"];
         r.minutesEnd = jr["minutesEnd"];
         r.symFunc = jr["symFunc"];
-        r.waypoint = jr["waypoint"];
+        r.waypoint = jr["waypoint"].get<std::string>();
         r.isOverlay = jr["isOverlay"];
 
         m_Routine.routine.push_back(r);

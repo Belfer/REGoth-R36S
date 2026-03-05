@@ -138,8 +138,8 @@ Engine::SavegameManager::SavegameInfo SavegameManager::readSavegameInfo(int idx)
     }
     SavegameInfo o;
     o.version = version;
-    o.name = j["name"];
-    o.world = j["world"];
+    o.name = j["name"].get<std::string>();
+    o.world = j["world"].get<std::string>();
     o.timePlayed = j["timePlayed"];
 
     return o;

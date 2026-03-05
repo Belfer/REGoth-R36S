@@ -1529,7 +1529,7 @@ void PlayerController::importObject(const json& j, bool noTransform)
         //for(std::string& s : scriptObj.name)
         //    s = Utils::utf8_to_iso8859_1(s.c_str());
 
-        scriptObj.slot = j["scriptObj"]["slot"];
+        scriptObj.slot = j["scriptObj"]["slot"].get<std::string>();
         scriptObj.npcType = j["scriptObj"]["npcType"];
         scriptObj.flags = (Daedalus::GEngineClasses::C_Npc::ENPCFlag)((int)j["scriptObj"]["flags"]);
 
@@ -1548,12 +1548,12 @@ void PlayerController::importObject(const json& j, bool noTransform)
         scriptObj.bodymass = j["scriptObj"]["bodymass"];
         scriptObj.daily_routine = j["scriptObj"]["daily_routine"];
         scriptObj.start_aistate = j["scriptObj"]["start_aistate"];
-        scriptObj.spawnPoint = j["scriptObj"]["spawnPoint"];
+        scriptObj.spawnPoint = j["scriptObj"]["spawnPoint"].get<std::string>();
         scriptObj.spawnDelay = j["scriptObj"]["spawnDelay"];
         scriptObj.senses = j["scriptObj"]["senses"];
         scriptObj.senses_range = j["scriptObj"]["senses_range"];
         Utils::putArray(scriptObj.aivar, j["scriptObj"]["aivar"]);
-        scriptObj.wp = j["scriptObj"]["wp"];
+        scriptObj.wp = j["scriptObj"]["wp"].get<std::string>();
         scriptObj.exp = j["scriptObj"]["exp"];
         scriptObj.exp_next = j["scriptObj"]["exp_next"];
         scriptObj.lp = j["scriptObj"]["lp"];

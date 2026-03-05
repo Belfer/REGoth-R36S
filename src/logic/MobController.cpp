@@ -28,7 +28,7 @@ void MobCore::exportCore(json& j)
 
 void MobCore::importCore(const json& j)
 {
-    m_Scheme = j["scheme"];
+    m_Scheme = j["scheme"].get<std::string>();
     m_StateNum = j["stateNum"];
 }
 
@@ -245,8 +245,8 @@ void MobController::initFromVobDescriptor(const ZenLoad::zCVobData& vob)
 
 void MobController::initFromJSONDescriptor(const json& j)
 {
-    m_FocusName = j["focusName"];
-    m_zObjectClass = j["objectClass"];
+    m_FocusName = j["focusName"].get<std::string>();
+    m_zObjectClass = j["objectClass"].get<std::string>();
 
     if (m_FocusName == "Bed")
         m_MobCore = new MobCores::Bed(m_World, m_Entity);

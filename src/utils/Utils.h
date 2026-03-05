@@ -301,7 +301,7 @@ namespace Utils
     {
         for (size_t i = 0; i < SIZE; i++)
         {
-            array[i] = source[i];
+            array[i] = source[i].get<A>();
         }
     }
 

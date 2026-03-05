@@ -89,7 +89,7 @@ std::unique_ptr<World::WorldInstance> GameSession::createWorld(const std::string
 
     if (!worldJson.empty())
     {
-        worldFile = worldJson["zenfile"];
+        worldFile = worldJson["zenfile"].get<std::string>();
     }
     if (!worldFile.empty())
     {
