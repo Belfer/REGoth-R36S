@@ -292,7 +292,9 @@ if(MSVC)
     file(MAKE_DIRECTORY ${SNDFILE_BUILD_DIR})
 
     execute_process(
-        COMMAND ${CMAKE_COMMAND} -D CMAKE_INSTALL_PREFIX=${SNDFILE_INSTALL_DIR} ${SNDFILE_SOURCE_DIR}
+        COMMAND ${CMAKE_COMMAND}
+            -D CMAKE_INSTALL_PREFIX=${SNDFILE_INSTALL_DIR}
+            ${SNDFILE_SOURCE_DIR}
         WORKING_DIRECTORY ${SNDFILE_BUILD_DIR}
         RESULT_VARIABLE result
     )
@@ -308,6 +310,8 @@ if(MSVC)
     if(result)
         message(FATAL_ERROR "Failed building libsndfile")
     endif()
+
+    list(PREPEND CMAKE_PREFIX_PATH ${SNDFILE_INSTALL_DIR})
 endif()
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/lib/libdmusic)
