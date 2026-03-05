@@ -282,6 +282,34 @@ set(DMUSIC_BUILD_DMPLAY OFF CACHE BOOL "" FORCE)
 set(DMUSIC_BUILD_DLS2SF OFF CACHE BOOL "" FORCE)
 set(DMUSIC_BUILD_SAMPLEDUMP OFF CACHE BOOL "" FORCE)
 
+if(MSVC)
+    set(SNDFILE_INSTALL_DIR ${CMAKE_BINARY_DIR})
+    set(SNDFILE_SOURCE_DIR ${CMAKE_SOURCE_DIR}/lib/libdmusic/utils/dls2sf/lib/libsndfile)
+    set(SNDFILE_BUILD_DIR ${CMAKE_BINARY_DIR}/build-libsndfile)
+
+    message(STATUS "Building bundled libsndfile...")
+
+    file(MAKE_DIRECTORY ${SNDFILE_BUILD_DIR})
+
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} -D CMAKE_INSTALL_PREFIX=${SNDFILE_INSTALL_DIR} ${SNDFILE_SOURCE_DIR}
+        WORKING_DIRECTORY ${SNDFILE_BUILD_DIR}
+        RESULT_VARIABLE result
+    )
+    if(result)
+        message(FATAL_ERROR "Failed configuring libsndfile")
+    endif()
+
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} --build . --target install --config Release
+        WORKING_DIRECTORY ${SNDFILE_BUILD_DIR}
+        RESULT_VARIABLE result
+    )
+    if(result)
+        message(FATAL_ERROR "Failed building libsndfile")
+    endif()
+endif()
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/lib/libdmusic)
 include_directories(${CMAKE_SOURCE_DIR}/lib/libdmusic/include)
 
